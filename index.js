@@ -62,13 +62,17 @@ function addToDO() {
 }
 function updateTodo() {}
 function eidtToDO(index) {
+  if (todoInput.value.trim() == '') {
+    alert("write your edit in the field");
+  } else {
     const todoDescription = todoInput.value.trim();
     const newTodo = {
       description: todoDescription,
       completed: false,
     };
-    todos[index]= newTodo;
-  displayTodos(todos);
+    todos[index] = newTodo;
+    displayTodos(todos);
+  }
 }
 
 function deletToDO(index) {

@@ -2,12 +2,15 @@
     background-color: black;
     color: aliceblue;
 }*/
-*{
-    text-align: center;
-    align-items: center;
+body{
+    max-width: 800px;
+    margin: auto;
 }
 .todos-container{
     padding: 5rem 0;
+    background-image: url("../images/stickynote.jpg");
+    background-size: cover;
+    width: auto;
     background-color: antiquewhite;
     display: flex;
     justify-content: center;
