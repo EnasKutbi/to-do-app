@@ -4,8 +4,7 @@ const todosList = document.querySelector(".todos-list");
 const addButton = document.querySelector("#add-btn");
 const todoInput = document.querySelector("#todo-input");
 
-const todos = [
-  { description: "learn HTML", completed: false },
+let todos = [
 ];
 
 function displayTodos(todos) {
