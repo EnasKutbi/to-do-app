@@ -6,8 +6,6 @@ const todoInput = document.querySelector("#todo-input");
 
 const todos = [
   { description: "learn HTML", completed: false },
-  { description: "learn CSS", completed: false },
-  { description: "learn JS", completed: false },
 ];
 
 function displayTodos(todos) {

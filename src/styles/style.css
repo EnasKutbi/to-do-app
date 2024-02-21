@@ -8,10 +8,7 @@ body{
 }
 .todos-container{
     padding: 5rem 0;
-    background-image: url("../images/stickynote.jpg");
-    background-size: cover;
-    width: auto;
-    background-color: antiquewhite;
+    background-color:lightblue;
     display: flex;
     justify-content: center;
     align-items: center;
