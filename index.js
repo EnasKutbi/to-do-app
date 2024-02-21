@@ -43,6 +43,7 @@ function displayTodos(todos) {
       //creat and add edit button to todoItem
       const todoEditButton = document.createElement("button");
       todoEditButton.textContent = "Edit";
+      todoEditButton.addEventListener("click", () => eidtToDO(index) )
       todoItem.appendChild(todoEditButton);
 
       todosList.appendChild(todoItem);
@@ -60,7 +61,15 @@ function addToDO() {
   displayTodos(todos);
 }
 function updateTodo() {}
-function eidtToDO() {}
+function eidtToDO(index) {
+    const todoDescription = todoInput.value.trim();
+    const newTodo = {
+      description: todoDescription,
+      completed: false,
+    };
+    todos[index]= newTodo;
+  displayTodos(todos);
+}
 
 function deletToDO(index) {
   todos.splice(index, 1);

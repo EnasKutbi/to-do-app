@@ -2,9 +2,9 @@
     background-color: black;
     color: aliceblue;
 }*/
-body{
-    max-width: 800px;
-    margin: auto;
+*{
+    text-align: center;
+    align-items: center;
 }
 .todos-container{
     padding: 5rem 0;
@@ -13,6 +13,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: scroll;
 }
 
 .todo{
