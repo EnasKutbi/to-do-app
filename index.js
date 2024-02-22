@@ -50,14 +50,18 @@ function displayTodos(todos) {
 
 function addToDO() {
   const todoDescription = todoInput.value.trim();
-  const newTodo = {
-    description: todoDescription,
-    completed: false,
-  };
-  todos.push(newTodo);
-  displayTodos(todos);
+  if (todoDescription.trim() == '') {
+    alert("write a descriotion to add");
+  } else {
+    const newTodo = {
+      description: todoDescription,
+      completed: false,
+    };
+    todos.push(newTodo);
+    displayTodos(todos);
+  }
 }
-function updateTodo() {}
+
 function eidtToDO(index) {
   if (todoInput.value.trim() == '') {
     alert("write your edit in the field");
