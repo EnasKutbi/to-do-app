@@ -4,8 +4,10 @@ const todosList = document.querySelector(".todos-list");
 const addButton = document.querySelector("#add-btn");
 const todoInput = document.querySelector("#todo-input");
 
-let todos = [
-];
+const searchInput = document.querySelector("#search-input");
+const searchForm = document.querySelector(".search");
+
+let todos = [];
 
 function displayTodos(todos) {
   todosList.innerHTML = "";
@@ -24,6 +26,7 @@ function displayTodos(todos) {
       const todoCheckbox = document.createElement("input");
       todoCheckbox.type = "checkbox";
       todoCheckbox.checked = todos[index].completed;
+      todoCheckbox.addEventListener("change", () => check(index));
       todoItem.appendChild(todoCheckbox);
 
       //creat and add description to todoItem
@@ -40,7 +43,14 @@ function displayTodos(todos) {
       //creat and add edit button to todoItem
       const todoEditButton = document.createElement("button");
       todoEditButton.textContent = "Edit";
-      todoEditButton.addEventListener("click", () => eidtToDO(index) )
+      todoEditButton.addEventListener("click", () => eidtToDO(index));
+
+      todoEditButton.addEventListener("mouseover", () => {
+        todoEditButton.textContent = "Hello world";
+      });
+      todoEditButton.addEventListener("mouseout", () => {
+        todoEditButton.textContent = "Edit";
+      });
       todoItem.appendChild(todoEditButton);
 
       todosList.appendChild(todoItem);
@@ -50,7 +60,7 @@ function displayTodos(todos) {
 
 function addToDO() {
   const todoDescription = todoInput.value.trim();
-  if (todoDescription.trim() == '') {
+  if (todoDescription.trim() == "") {
     alert("write a descriotion to add");
   } else {
     const newTodo = {
@@ -59,11 +69,28 @@ function addToDO() {
     };
     todos.push(newTodo);
     displayTodos(todos);
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+}
+
+function check(checkbox) {
+  if (checkbox.check) {
+    checkbox.style.textDecoration = "line-through";
+  } else {
+    checkbox.style.textDecoration = "none";
+  }
+}
+
+function pirntNoTodo(todos) {
+  const todoItem = document.createElement("p");
+
+  while (todos.length === 0) {
+    todosList.appendChild(todoItem);
   }
 }
 
 function eidtToDO(index) {
-  if (todoInput.value.trim() == '') {
+  if (todoInput.value.trim() == "") {
     alert("write your edit in the field");
   } else {
     const todoDescription = todoInput.value.trim();
@@ -79,11 +106,27 @@ function eidtToDO(index) {
 function deletToDO(index) {
   todos.splice(index, 1);
   displayTodos(todos);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+try {
+  const storedTodos = JSON.parse(localStorage.getItem("todos"));
+  if (storedTodos) {
+    todos = storedTodos;
+    displayTodos(todos);
+  }
+} catch (error) {
+  console.log(error);
+  console.log("An error occured while fetching the todos from localstorage");
 }
 
 addButton.addEventListener("click", addToDO);
 
-displayTodos(todos);
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+});
+
+//displayTodos(todos);
 
 /*
 function download() {
@@ -112,3 +155,7 @@ getElementsByClassName();
 getElementsByTagName();
 getElementById();
 */
+
+//localStorage.setItem('usernsme', 'Enas Kutbi');
+//localStorage.getItem('username');
+//localStorage.removeItem('username');
