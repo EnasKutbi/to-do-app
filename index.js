@@ -3,6 +3,7 @@
 const todosList = document.querySelector(".todos-list");
 const addButton = document.querySelector("#add-btn");
 const todoInput = document.querySelector("#todo-input");
+const todoCountEleement = document.querySelector(".todo-count");
 
 const searchInput = document.querySelector("#search-input");
 const searchForm = document.querySelector(".search");
@@ -12,12 +13,13 @@ let todos = [];
 function displayTodos(todos) {
   todosList.innerHTML = "";
   if (todos.length === 0) {
+    todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
     console.log("No todos found");
   } else {
     /*for (const todo of todos) {
       console.log(todo.description);
     }*/
-    for (let index = 0; index < todos.length; index++) {
+    todos.forEach(function (todo, index) {
       //creat a div todoItem
       const todoItem = document.createElement("div");
       todoItem.classList.add("todo");
@@ -25,13 +27,13 @@ function displayTodos(todos) {
       //add checkbox to todoItem
       const todoCheckbox = document.createElement("input");
       todoCheckbox.type = "checkbox";
-      todoCheckbox.checked = todos[index].completed;
+      todoCheckbox.checked = todo.completed;
       todoCheckbox.addEventListener("change", () => check(index));
       todoItem.appendChild(todoCheckbox);
 
       //creat and add description to todoItem
       const todoDescription = document.createElement("p");
-      todoDescription.textContent = todos[index].description;
+      todoDescription.textContent = todo.description;
       todoItem.appendChild(todoDescription);
 
       //creat and add delete button to todoItem
@@ -53,8 +55,9 @@ function displayTodos(todos) {
       });
       todoItem.appendChild(todoEditButton);
 
+      todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
       todosList.appendChild(todoItem);
-    }
+    })
   }
 }
 
@@ -70,6 +73,7 @@ function addToDO() {
     todos.push(newTodo);
     displayTodos(todos);
     localStorage.setItem("todos", JSON.stringify(todos));
+    todoInput.value = "";
   }
 }
 
@@ -109,16 +113,21 @@ function deletToDO(index) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-try {
-  const storedTodos = JSON.parse(localStorage.getItem("todos"));
-  if (storedTodos) {
-    todos = storedTodos;
-    displayTodos(todos);
+//load data from the localstorage when the window is loaded
+function loadDataFromLokalStorage() {
+  try {
+    const storedTodos = JSON.parse(localStorage.getItem("todos"));
+    if (storedTodos) {
+      todos = storedTodos;
+      displayTodos(todos);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("An error occured while fetching the todos from localstorage");
   }
-} catch (error) {
-  console.log(error);
-  console.log("An error occured while fetching the todos from localstorage");
 }
+
+window.addEventListener("DOMContentLoaded", loadDataFromLokalStorage)
 
 addButton.addEventListener("click", addToDO);
 

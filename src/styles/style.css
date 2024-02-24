@@ -25,9 +25,9 @@ body {
     flex-direction: column;
 }
 
-.todos-list{
+/* .todos-list{
     overflow: scroll;
-}
+} */
 
 .todo {
     display: flex;
