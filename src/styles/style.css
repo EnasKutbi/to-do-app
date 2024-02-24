@@ -2,51 +2,54 @@
     background-color: black;
     color: aliceblue;
 }*/
+*{
+    font-family: 'Cheeronsta', sans-serif;
+    /* font-family: 'Cheeronsta Light', sans-serif; */
+}
 body {
-    background-image: radial-gradient(circle at center, #F07162 , #FED9B7);
+    /* background-image: linear-gradient(to right, #FED9B7 55% , #F07162); */
     display: flex;
     justify-content: center;
 }
 
-.search{
-    margin: 2rem;
-}
-
 .todos-container {
-    height: 400px;
+    height: 500px;
     width: 600px;
     margin-top: 5rem;
     border-radius: 30px;
     background-color:white;
     box-shadow: 0 0 20px gray;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-/* .todos-list{
-    overflow: scroll;
-} */
+.todos-list{
+    overflow-y: auto;
+    width: 370px;
+    height: 300px;
+} 
 
 .todo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
-    font-size: 25px;
+    font-size: 13px;
     background-color: rgba(255, 255, 255, 0);
     color: black;
-    padding: 0.5rem;
+    background-color: antiquewhite;
+    padding: 0.2rem;
     margin: 0.5rem;
-    border-radius: 0.5rem;
-    width: 300px;
+    border-radius: 20px;
+    width: 320px;
     height: 30px;
 }
 
-#todo-input{
+#todo-input, #search-input{
+    margin: 1rem 0rem;
     height: 30px;
-    width: 300px;
+    width: 250px;
     border-radius: 20px;
     background-color:#F07162;
 }
@@ -55,9 +58,7 @@ button{
     border: none;
     height: 30px;
     width: 60px;
-    background-color: #00AFB9;
-    box-shadow: 0 0 5px gray;
-    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0);
     cursor: pointer;
 }
 

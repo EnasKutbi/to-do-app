@@ -4,6 +4,7 @@ const todosList = document.querySelector(".todos-list");
 const addButton = document.querySelector("#add-btn");
 const todoInput = document.querySelector("#todo-input");
 const todoCountEleement = document.querySelector(".todo-count");
+const searchButton = document.querySelector("#search-btn");
 
 const searchInput = document.querySelector("#search-input");
 const searchForm = document.querySelector(".search");
@@ -36,36 +37,37 @@ function displayTodos(todos) {
       todoDescription.textContent = todo.description;
       todoItem.appendChild(todoDescription);
 
-      //creat and add delete button to todoItem
-      const todoDeleteButton = document.createElement("button");
-      todoDeleteButton.textContent = "Delete";
-      todoDeleteButton.addEventListener("click", () => deletToDO(index));
-      todoItem.appendChild(todoDeleteButton);
-
       //creat and add edit button to todoItem
       const todoEditButton = document.createElement("button");
-      todoEditButton.textContent = "Edit";
+      todoEditButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
       todoEditButton.addEventListener("click", () => eidtToDO(index));
-
-      todoEditButton.addEventListener("mouseover", () => {
-        todoEditButton.textContent = "Hello world";
-      });
-      todoEditButton.addEventListener("mouseout", () => {
-        todoEditButton.textContent = "Edit";
-      });
+      mouse(
+        todoEditButton,
+        "Edit",
+        `<i class="fa-solid fa-pen-to-square"></i>`
+      );
       todoItem.appendChild(todoEditButton);
+
+      //creat and add delete button to todoItem
+      const todoDeleteButton = document.createElement("button");
+      todoDeleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+      todoDeleteButton.addEventListener("click", () => deletToDO(index));
+      mouse(todoDeleteButton, "Delete", `<i class="fa-solid fa-trash"></i>`);
+      todoItem.appendChild(todoDeleteButton);
 
       todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
       todosList.appendChild(todoItem);
-    })
+    });
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      searchTodo(searchInput);
+    } );
   }
 }
 
 function addToDO() {
   const todoDescription = todoInput.value.trim();
-  if (todoDescription.trim() == "") {
-    alert("write a descriotion to add");
-  } else {
+  if (todoDescription) {
     const newTodo = {
       description: todoDescription,
       completed: false,
@@ -74,6 +76,8 @@ function addToDO() {
     displayTodos(todos);
     localStorage.setItem("todos", JSON.stringify(todos));
     todoInput.value = "";
+  } else {
+    alert("write a descriotion to add");
   }
 }
 
@@ -85,25 +89,14 @@ function check(checkbox) {
   }
 }
 
-function pirntNoTodo(todos) {
-  const todoItem = document.createElement("p");
-
-  while (todos.length === 0) {
-    todosList.appendChild(todoItem);
-  }
-}
-
 function eidtToDO(index) {
-  if (todoInput.value.trim() == "") {
-    alert("write your edit in the field");
-  } else {
-    const todoDescription = todoInput.value.trim();
-    const newTodo = {
-      description: todoDescription,
-      completed: false,
-    };
-    todos[index] = newTodo;
+  const newDescription = prompt("Edit Todo: ", todos[index].description);
+  if (newDescription) {
+    todos[index].description = newDescription;
+    localStorage.setItem('todos', JSON.stringify(todos));
     displayTodos(todos);
+  } else {
+    alert("write your edit for todo");
   }
 }
 
@@ -111,6 +104,32 @@ function deletToDO(index) {
   todos.splice(index, 1);
   displayTodos(todos);
   localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function searchTodo(input) {
+  if (input) {
+    const searchItem = input.value.trim().toLowerCase();
+    const filterdTodos = [];
+    todos.forEach(todo => {
+      if (todo.description.toLowerCase().includes(searchItem)) {
+        filterdTodos.push(todo);
+      }
+    });
+    displayTodos(filterdTodos);
+
+  } else {
+    displayTodos(todos);
+    alert("enter a valid input");
+  }
+}
+
+function mouse(button, mouseover, mouseout) {
+  button.addEventListener("mouseover", () => {
+    button.textContent = mouseover;
+  });
+  button.addEventListener("mouseout", () => {
+    button.innerHTML = mouseout;
+  });
 }
 
 //load data from the localstorage when the window is loaded
@@ -127,13 +146,13 @@ function loadDataFromLokalStorage() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", loadDataFromLokalStorage)
+window.addEventListener("DOMContentLoaded", loadDataFromLokalStorage);
 
 addButton.addEventListener("click", addToDO);
+mouse(addButton, "add", `<i class="fa-solid fa-plus"></i>`);
+mouse(searchButton, "Search", `<i class="fa-solid fa-magnifying-glass"></i>`);
 
-searchForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-});
+searchForm.addEventListener("submit", () => searchTodo(searchInput));
 
 //displayTodos(todos);
 
