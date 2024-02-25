@@ -3,7 +3,7 @@
 const todosList = document.querySelector(".todos-list");
 const addButton = document.querySelector("#add-btn");
 const todoInput = document.querySelector("#todo-input");
-const todoCountEleement = document.querySelector(".todo-count");
+const todoCountElement = document.querySelector(".todo-count");
 const searchButton = document.querySelector("#search-btn");
 
 const searchInput = document.querySelector("#search-input");
@@ -14,8 +14,7 @@ let todos = [];
 function displayTodos(todos) {
   todosList.innerHTML = "";
   if (todos.length === 0) {
-    todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
-    console.log("No todos found");
+    todoCountElement.textContent = `Total Number of todos: ${todos.length}`;
   } else {
     todos.forEach(function (todo, index) {
       //creat a div todoItem
@@ -38,7 +37,7 @@ function displayTodos(todos) {
       //creat and add edit button to todoItem
       const todoEditButton = document.createElement("button");
       todoEditButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
-      todoEditButton.addEventListener("click", () => eidtToDO(index));
+      todoEditButton.addEventListener("click", () => eidtTodo(index));
       mouse(
         todoEditButton,
         "Edit",
@@ -53,7 +52,7 @@ function displayTodos(todos) {
       mouse(todoDeleteButton, "Delete", `<i class="fa-solid fa-trash"></i>`);
       todoItem.appendChild(todoDeleteButton);
 
-      todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
+      todoCountElement.textContent = `Total Number of todos: ${todos.length}`;
       todosList.appendChild(todoItem);
     });
     //search
@@ -80,7 +79,7 @@ function addToDO() {
   }
 }
 
-function eidtToDO(index) {
+function eidtTodo(index) {
   const newDescription = prompt("Edit Todo: ", todos[index].description);
   if (newDescription) {
     todos[index].description = newDescription;
