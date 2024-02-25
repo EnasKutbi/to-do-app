@@ -17,9 +17,6 @@ function displayTodos(todos) {
     todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
     console.log("No todos found");
   } else {
-    /*for (const todo of todos) {
-      console.log(todo.description);
-    }*/
     todos.forEach(function (todo, index) {
       //creat a div todoItem
       const todoItem = document.createElement("div");
