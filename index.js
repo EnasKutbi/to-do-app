@@ -32,6 +32,7 @@ function displayTodos(todos) {
       //creat and add description to todoItem
       const todoDescription = document.createElement("p");
       todoDescription.textContent = todo.description;
+      todoDescription.style.width = "200px";
       todoItem.appendChild(todoDescription);
 
       //creat and add edit button to todoItem
