@@ -25,7 +25,6 @@ function displayTodos(todos) {
       const todoCheckbox = document.createElement("input");
       todoCheckbox.type = "checkbox";
       todoCheckbox.checked = todo.completed;
-      todoCheckbox.addEventListener("change", () => check(index));
       todoItem.appendChild(todoCheckbox);
 
       //creat and add description to todoItem
@@ -108,7 +107,6 @@ function searchTodo(input) {
     displayTodos(filterdTodos);
   } else {
     displayTodos(todos);
-    alert("enter a valid input");
   }
 }
 
