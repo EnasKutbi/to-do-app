@@ -58,10 +58,11 @@ function displayTodos(todos) {
       todoCountEleement.textContent = `Total Number of todos: ${todos.length}`;
       todosList.appendChild(todoItem);
     });
-    searchForm.addEventListener("submit", event => {
+    //search
+    searchForm.addEventListener("submit", (event) => {
       event.preventDefault();
       searchTodo(searchInput);
-    } );
+    });
   }
 }
 
@@ -81,19 +82,11 @@ function addToDO() {
   }
 }
 
-function check(checkbox) {
-  if (checkbox.check) {
-    checkbox.style.textDecoration = "line-through";
-  } else {
-    checkbox.style.textDecoration = "none";
-  }
-}
-
 function eidtToDO(index) {
   const newDescription = prompt("Edit Todo: ", todos[index].description);
   if (newDescription) {
     todos[index].description = newDescription;
-    localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem("todos", JSON.stringify(todos));
     displayTodos(todos);
   } else {
     alert("write your edit for todo");
@@ -110,19 +103,19 @@ function searchTodo(input) {
   if (input) {
     const searchItem = input.value.trim().toLowerCase();
     const filterdTodos = [];
-    todos.forEach(todo => {
+    todos.forEach((todo) => {
       if (todo.description.toLowerCase().includes(searchItem)) {
         filterdTodos.push(todo);
       }
     });
     displayTodos(filterdTodos);
-
   } else {
     displayTodos(todos);
     alert("enter a valid input");
   }
 }
 
+//this function for hovor
 function mouse(button, mouseover, mouseout) {
   button.addEventListener("mouseover", () => {
     button.textContent = mouseover;
@@ -151,39 +144,4 @@ window.addEventListener("DOMContentLoaded", loadDataFromLokalStorage);
 addButton.addEventListener("click", addToDO);
 mouse(addButton, "add", `<i class="fa-solid fa-plus"></i>`);
 mouse(searchButton, "Search", `<i class="fa-solid fa-magnifying-glass"></i>`);
-
 searchForm.addEventListener("submit", () => searchTodo(searchInput));
-
-//displayTodos(todos);
-
-/*
-function download() {
-    alert('downloaded');
-}
-const downloadButton = document.getElementById('download-btn');
-downloadButton.addEventListener("click", download);
-*/
-
-/*
-const heading1 = document.getElementsByTagName("h1") [0];
-console.log(heading1);
-heading1.textContent = "My List";
-heading1.style.color = "red";
-*/
-//heading1.classList.remove("title");
-/*
-const heading1 = document.getElementById('add-button');
-heading1.textContent = "Add";
-*/
-
-/* 
-const heading1 = document.querySelector("#id");
-const heading1 = document.querySelector(".class");
-getElementsByClassName();
-getElementsByTagName();
-getElementById();
-*/
-
-//localStorage.setItem('usernsme', 'Enas Kutbi');
-//localStorage.getItem('username');
-//localStorage.removeItem('username');
