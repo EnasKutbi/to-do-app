@@ -36,7 +36,7 @@ function displayTodos(todos) {
       //creat and add edit button to todoItem
       const todoEditButton = document.createElement("button");
       todoEditButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
-      todoEditButton.addEventListener("click", () => eidtTodo(index));
+      todoEditButton.addEventListener("click", () => editTodo(index));
       mouse(
         todoEditButton,
         "Edit",
@@ -78,7 +78,7 @@ function addToDO() {
   }
 }
 
-function eidtTodo(index) {
+function editTodo(index) {
   const newDescription = prompt("Edit Todo: ", todos[index].description);
   if (newDescription) {
     todos[index].description = newDescription;
